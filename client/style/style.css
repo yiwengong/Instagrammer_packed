@@ -1,0 +1,208 @@
+.signup_paper {
+  margin-top: 65px;
+  text-align: center;
+}
+
+.signup_title {
+  padding: 5px;
+  margin: 0px;
+  font-family:cursive;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login_paper {
+  margin-top: 65px;
+  text-align: center;
+}
+
+.login_title{
+  padding: 10px;
+  margin-top: 20px;
+  font-family:cursive;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}
+
+.message {
+  text-align: center;
+  color: rgb(25, 188, 224)
+}
+
+.appTitle{
+  margin: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #e7e7e7;
+  position: relative;
+  display: flex;
+  display: -webkit-flex; /*Safari, google*/
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap:wrap;
+}
+
+.title_container{
+  margin: 5px;
+  width: 300px;
+  min-width: 40px;
+  flex-shrink: 2;
+}
+
+.searchBar_container{
+  margin: 5px;
+  width: 150px;
+  min-width: 40px;
+  flex-shrink: 2;
+}
+
+.buttons_container{
+  margin: 5px;
+  width: 300px;
+  position: relative;
+  display: flex;
+  display: -webkit-flex; /*Safari, google*/
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:wrap;
+}
+
+
+.title_button{
+  text-decoration: none;
+  font-family:cursive;
+  font-size: 25px;
+  font-weight: bolder;
+  font-style: normal;
+  color: rgb(0, 0, 0);
+}
+
+
+.searchBar {
+  border: 1px solid #e7e7e7;
+  background-color: #fff;
+  color: inherit;
+  font-size: 14px;
+  border-radius: 5px;
+  text-align: center;
+  height: 25px;
+}
+
+.searchBar:focus{
+  text-align: left;
+}
+
+.tab_container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.head_container {
+  padding: 15px;
+  position: relative;
+  display: flex;
+  display: -webkit-flex; /*Safari, google*/
+  width: 100%;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+}
+
+.avatar {
+  width: 150px;
+}
+
+.details {
+  width: 300px;
+}
+
+.username {
+  margin-left: 35px;
+  margin-bottom: 10px;
+  font-family:serif;
+  font-size:20px;
+  font-weight: bolder;
+}
+
+.items_container,
+.tag_container {
+  margin-left: 20px;
+  display: flex;
+  display: -webkit-flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+}
+
+.posts,
+.followers,
+.following {
+  padding: 10px;
+  font-family:serif;
+  font-size: 15px;
+
+}
+
+.post_container {
+  display: flex;
+  display: -webkit-flex; /*Safari, google*/
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.post {
+  height: 640;
+  width: 550;
+  margin: 20;
+  text-align: center;
+  display: inline-block;
+}
+
+.postNew {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.title {
+  text-align: left;
+  padding: 15px;
+  font-size: 30px;
+  font-family:cursive;
+  font-weight: bold;
+}
+
+.content {
+  font-size: 14px;
+}
+
+textarea {
+    overflow-y: scroll;
+    height: 100px;
+    resize: none;
+}
+
+.changePassword {
+  font-family:serif;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+}
