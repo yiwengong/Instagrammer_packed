@@ -62,6 +62,10 @@ class SignupPage extends Component {
     }
   }
 
+  handleCancel(){
+    this.props.history.push('/');
+  }
+
   render() {
     const { handleSubmit } = this.props;
     return(
@@ -98,7 +102,7 @@ class SignupPage extends Component {
             <FlatButton
               type="button"
               label="Cancel"
-              containerElement ={<Link to ="/signin"/>}
+              onClick={this.handleCancel.bind(this)}
               secondary={true}
             />
             <FlatButton

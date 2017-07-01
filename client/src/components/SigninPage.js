@@ -11,7 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 //paper generate
 const style_paper1 = {
-  height: 450,
+  height: 500,
   width: 300,
   margin: 20,
   textAlign: 'center',
