@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_USER, AUTH_ERROR,UNAUTH_USER,FETCH_USERINFO,CHANGE_PASSWORD} from './types';
+import {AUTH_USER, AUTH_ERROR,UNAUTH_USER,FETCH_USERINFO,CHANGE_PASSWORD, POST_CREATE,POST_ERROR} from './types';
 
 const ROOT_URL = 'http://localhost:3090';
 
@@ -10,7 +10,6 @@ export function signupUser({email, username, password}, callback) {
     //Submit email/username/password to the server
     axios.post(`${ROOT_URL}/users/signup`, {email, username, password})
       .then(response => {
-        console.log(response);
         dispatch({type: AUTH_USER});
         localStorage.setItem('token', response.data.token);
         callback();
@@ -75,8 +74,6 @@ export function changeUserPassword({oldPassword,newPassword}) {
 
     axios.put(`${ROOT_URL}/users`, data, config)
       .then(response => {
-        //If request is good
-        console.log(response);
         dispatch({
           type: CHANGE_PASSWORD,
           payload: response.data
@@ -88,9 +85,6 @@ export function changeUserPassword({oldPassword,newPassword}) {
 
   }
 }
-
-
-
 
 export function fetchUserInfo() {
 
@@ -106,3 +100,36 @@ export function fetchUserInfo() {
       });
   }
 }
+
+//Posts:
+
+export function createNewPost(data, callback) {
+  //Submit token and data to the server
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.post(`${ROOT_URL}/posts/new`,data, config)
+      .then(response => {
+        //If request is good
+        dispatch({
+          type: POST_CREATE
+        });
+        callback();
+      })
+      .catch(()=> {
+        //If request is bad...
+        //1.Show an error to the user
+        dispatch((postError('Please choose a image.')));
+      });
+  }
+}
+
+export function postError(error) {
+  return{
+    type: POST_ERROR,
+    payload: error
+  };
+};

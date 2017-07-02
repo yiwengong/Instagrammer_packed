@@ -23,6 +23,7 @@
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "html-webpack-plugin": "^2.29.0",
     "material-ui": "^0.18.4",
+    "react-native": "^0.45.1",
     "react-tap-event-plugin": "^2.0.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
@@ -32,6 +33,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "lodash": "^4.17.4",
+    "material-ui-upload": "^1.1.5",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

@@ -6,10 +6,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
+
 //Routes
 userRoutes = require('./routes/userRoutes');
 commentRoutes = require('./routes/commentRoutes');
 postRoutes = require('./routes/postRoutes');
+
 
 //set up express
 const app = express();
@@ -28,7 +30,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // static files
-app.use('/images', express.static(__dirname + '/public/images'));
+app.use('/posts', express.static(__dirname + '/../public/posts'));
+app.use('/avatar', express.static(__dirname + '/../public/avatar'));
 
 // Routes
 userRoutes(app);

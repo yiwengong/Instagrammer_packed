@@ -1,14 +1,15 @@
 const Post = require('../schema/post');
 
+
 module.exports = {
 
   create: function(req, res, next){
-
+    console.log(req.file);
     const postProps = {
-      image: req.body.image,
+      image: req.file.path,
       content: req.body.content,
       likes: req.body.likes,
-      user_id: req.params.userId
+      user_id: req.user._id
     }
 
     Post.create(postProps)
