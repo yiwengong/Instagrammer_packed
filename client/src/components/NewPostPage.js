@@ -7,7 +7,7 @@ export default class NewPostPage extends Component {
     return (
       <div>
         <AppTitle />
-        <PostNew />
+        <PostNew history={this.props.history}/>
       </div>
     );
   }

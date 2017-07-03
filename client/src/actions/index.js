@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_USER, AUTH_ERROR,UNAUTH_USER,FETCH_USERINFO,CHANGE_PASSWORD, POST_CREATE,POST_ERROR} from './types';
+import {AUTH_USER, AUTH_ERROR,UNAUTH_USER,FETCH_USERINFO,CHANGE_PASSWORD, POST_CREATE,FETCH_POSTINFO, POST_ERROR} from './types';
 
 const ROOT_URL = 'http://localhost:3090';
 
@@ -114,9 +114,7 @@ export function createNewPost(data, callback) {
     axios.post(`${ROOT_URL}/posts/new`,data, config)
       .then(response => {
         //If request is good
-        dispatch({
-          type: POST_CREATE
-        });
+        dispatch({type: POST_CREATE});
         callback();
       })
       .catch(()=> {
@@ -124,6 +122,26 @@ export function createNewPost(data, callback) {
         //1.Show an error to the user
         dispatch((postError('Please choose a image.')));
       });
+  }
+}
+
+export function fetchPosts() {
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.get(`${ROOT_URL}/users/posts`,config)
+      .then(response =>{
+        dispatch({
+          type: FETCH_POSTINFO,
+          payload: response.data
+        });
+      })
+      .catch(() =>{
+        dispatch((postError('Something wrong!')));
+      })
   }
 }
 

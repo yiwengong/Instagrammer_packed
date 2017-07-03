@@ -35,6 +35,12 @@ const styles = {
 
 class PostNew extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData();
@@ -42,7 +48,7 @@ class PostNew extends Component {
     const content = document.getElementById('myContent').value;
     data.append('posts', file);
     data.append('content', content);
-    this.props.createNewPost(data, ()=>{
+    this.props.createNewPost(data, () => {
       this.props.history.push('/');
     });
   }
@@ -50,7 +56,7 @@ class PostNew extends Component {
   render() {
     console.log(this.props);
     return (
-      <form className="postNew" onSubmit = {this.handleSubmit.bind(this)}>
+      <form className="postNew" onSubmit={this.handleSubmit}>
         <Paper style={styles.paper_style} zDepth={1}>
           <div className="title">Anything new?</div>
           <div className="input_container">
@@ -87,7 +93,7 @@ class PostNew extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.post.error};
+  return { errorMessage: state.posts.error};
 }
 
 export default connect(mapStateToProps, actions)(PostNew)

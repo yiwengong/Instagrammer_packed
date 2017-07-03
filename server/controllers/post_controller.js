@@ -1,5 +1,5 @@
 const Post = require('../schema/post');
-
+const User = require('../schema/user');
 
 module.exports = {
 
@@ -13,8 +13,18 @@ module.exports = {
     }
 
     Post.create(postProps)
-      .then(post =>res.send(post))
+      .then(post => {
+        User.findById({_id:req.user._id})
+          .then(user =>{
+            user.posts.push(post);
+            user.save()
+              .then(() =>{
+                res.send(post);
+              })
+          })
+        })
       .catch(next);
+
   },
 
   update: function(req,res, next){

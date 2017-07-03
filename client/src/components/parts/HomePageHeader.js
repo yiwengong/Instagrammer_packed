@@ -26,17 +26,15 @@ class HomePageHeader extends Component {
   }
 
   handleSignOut(){
-    console.log(this.props);
     this.props.signoutUser();
   }
 
   render() {
     const {user} = this.props;
-    console.log(user);
     let username,posts, following,followers;
     if(user) {
       username = user.username;
-      // posts = user.posts.length;
+      posts = user.posts.length;
       following = user.following.length;
       followers = user.followers.length;
     }else{

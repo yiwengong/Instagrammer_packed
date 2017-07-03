@@ -1,4 +1,5 @@
 const User = require('../schema/user');
+const Post = require('../schema/post');
 
 module.exports = {
 
@@ -30,7 +31,6 @@ module.exports = {
   changePassword: function(req,res,next) {
     const {user} = req;
     const {oldPassword, newPassword} = req.body;
-    console.log(oldPassword);
     user.comparePassword(oldPassword,function(err, isMatch){
       if(err) {return next(err)}
       if(!isMatch) {
@@ -44,6 +44,13 @@ module.exports = {
         return res.send("password changed!");
       }
     });
+  },
+
+  //Find all the posts of the user
+  findPosts: function(req,res,next) {
+    User.findById({ _id: req.user._id})
+    .populate('posts')
+    .then(user => res.send(user.posts));
   }
 
 }

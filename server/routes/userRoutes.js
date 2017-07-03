@@ -13,6 +13,7 @@ module.exports = function(app) {
   });
   app.post('/users/signin',requireSignin, Authentication.signin);
   app.post('/users/signup', Authentication.signup);
+  app.get('/users/posts', requireAuth, UserController.findPosts);
   app.get('/users/:username', requireAuth, UserController.find);
   app.put('/users', requireAuth, UserController.changePassword);
   app.get('/users', requireAuth, UserController.findUserInfo);
