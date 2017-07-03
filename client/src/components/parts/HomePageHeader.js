@@ -11,9 +11,23 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 
-
-const style = {
-  margin: 12,
+const styles = {
+  raisedButton:{
+    margin:12
+  },
+  uploadButton: {
+    verticalAlign: 'middle',
+  },
+  uploadInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
 };
 
 class HomePageHeader extends Component {
@@ -27,6 +41,12 @@ class HomePageHeader extends Component {
 
   handleSignOut(){
     this.props.signoutUser();
+  }
+
+  handleUploadAvatar(){
+    const file = document.getElementById("avatarFile").files[0];
+    console.log(file);
+    // this.props.changeAvatar();
   }
 
   render() {
@@ -46,6 +66,7 @@ class HomePageHeader extends Component {
 
     return(
       <div className="head_container">
+
         <div className="avatar">
           <Avatar src="/avatar/image1.jpg" size={125} />
         </div>
@@ -55,8 +76,8 @@ class HomePageHeader extends Component {
             <div>
               <RaisedButton
                 label="Edit Profiles"
-                style={style}
-                containerElement={<Link to="/editfile" />}
+                style={styles.raisedButton}
+                href="/editfile"
               />
             </div>
             <div>
@@ -79,6 +100,8 @@ class HomePageHeader extends Component {
             <div className="followers">{followers} followers</div>
           </div>
         </div>
+
+
 
       </div>
     );

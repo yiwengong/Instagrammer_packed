@@ -200,14 +200,14 @@ textarea {
     resize: none;
 }
 
-.changePassword {
-  font-family:serif;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px;
+.changePassword_container{
+  margin-left: 20px;
+  width: 100%;
+  align-items: center;
 }
 
-.input_container {
+.input_container,
+.avatar_container {
   text-align:center;
   margin: 10px;
 }
