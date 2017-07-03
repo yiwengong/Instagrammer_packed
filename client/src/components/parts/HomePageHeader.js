@@ -51,12 +51,13 @@ class HomePageHeader extends Component {
 
   render() {
     const {user} = this.props;
-    let username,posts, following,followers;
+    let username,posts, following,followers, avatar;
     if(user) {
       username = user.username;
       posts = user.posts.length;
       following = user.following.length;
       followers = user.followers.length;
+      avatar = user.avatar
     }else{
       username = 'loading';
       posts = 'loading';
@@ -68,7 +69,7 @@ class HomePageHeader extends Component {
       <div className="head_container">
 
         <div className="avatar">
-          <Avatar src="/avatar/image1.jpg" size={125} />
+          <Avatar src={avatar} size={125} />
         </div>
         <div className="details">
           <div className= "username">{username}</div>

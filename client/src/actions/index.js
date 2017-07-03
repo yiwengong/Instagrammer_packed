@@ -89,9 +89,12 @@ export function changeUserPassword({oldPassword,newPassword}) {
 export function fetchUserInfo() {
 
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/users`, {
-      headers: {authorization: localStorage.getItem('token')},
-    })
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.get(`${ROOT_URL}/users`, config)
       .then(response => {
         dispatch({
           type: FETCH_USERINFO,

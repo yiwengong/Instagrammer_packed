@@ -29,6 +29,10 @@ class ChangeAvatar extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.fetchUserInfo();
+  }
+
   handleAvatarSubmit(e) {
 
   }
@@ -47,6 +51,7 @@ class ChangeAvatar extends Component {
 
   renderAvatar() {
     let {imagePreviewUrl} = this.state;
+    const {user} = this.props;
     if(imagePreviewUrl) {
       return(
         <Avatar
@@ -55,14 +60,19 @@ class ChangeAvatar extends Component {
          style={styles.avatar}
          />
       );
-    }else{
+    }else if(user){
       return(
         <Avatar
-         src="/avatar/image1.jpg"
+         src={user.avatar}
          size={150}
          style={styles.avatar}
          />
       );
+    }else{
+      return(
+        <div>loading...</div>
+      );
+
     }
   }
 
@@ -82,6 +92,7 @@ class ChangeAvatar extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user.userInfo
 
   };
 }
