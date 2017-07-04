@@ -4,7 +4,7 @@ import * as actions from '../actions';
 
 //import components
 import AppTitle from './parts/AppTitle';
-import Card from './parts/IndexPageContents/Postdiy';
+import Cards from './parts/IndexPageContents/Postdiy';
 import SugguestedFollower from './parts/IndexPageContents/SugguestedFollowers';
 import Intro from './parts/IndexPageContents/Intro';
 
@@ -26,7 +26,7 @@ class IndexPage extends Component {
         );
       }else {
         return(
-          <Card />
+          <Cards />
         );
       }
     }else{

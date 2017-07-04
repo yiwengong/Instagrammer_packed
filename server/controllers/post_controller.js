@@ -9,7 +9,8 @@ module.exports = {
       image: req.file.path,
       content: req.body.content,
       likes: req.body.likes,
-      user_id: req.user._id
+      user_id: req.user._id,
+      timeField:new Date().getTime()
     }
 
     Post.create(postProps)
@@ -25,6 +26,17 @@ module.exports = {
         })
       .catch(next);
 
+  },
+
+  fetchFollowingPosts: function(req,res,next) {
+    const {user} = req;
+    Post.find({user_id: {$in: user.following}})
+      .populate('user_id')
+      .sort({timeField:1})
+      .limit(10)
+      .then(posts=>{
+        res.send(posts);
+      })
   },
 
   update: function(req,res, next){
@@ -45,5 +57,7 @@ module.exports = {
       .then(post => res.status(204).send(post))
       .catch(next);
   }
+
+
 
 }

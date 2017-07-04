@@ -1,80 +1,109 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../../../actions';
+
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import TextField from 'material-ui/TextField';
+import Checkbox from 'material-ui/Checkbox';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
-
-const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
-
-
-const style = {
-  height: 800,
-  width: 550,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
+const styles = {
+  paper:{
+    height: 900,
+    width: 550,
+    margin: 20,
+    display: 'inline-block',
+  },
+  checkbox: {
+    marginTop: 20,
+    marginLeft:10,
+  },
 };
 
-export default class Postdiy extends Component {
+class Postdiy extends Component {
   constructor(props) {
       super(props);
-      this.state = {selectedIndex: 0};
+      this.changeLikes = this.changeLikes.bind(this);
   }
 
-  select(index) {
-      this.setState({selectedIndex: index});
+  componentWillMount() {
+    this.props.fetchFollowingPosts();
+  }
+
+  changeLikes(postId) {
+    this.changeLikes(postId);
+  }
+
+  renderCard() {
+    const posts = this.props.followingPostsInfo;
+    const {postChanged} = this.props
+    if(posts) {
+      return(
+        <div>
+          {posts.map((post) =>(
+            <div className="post_container" key={post._id}>
+              <Paper style={styles.paper} zDepth={1}>
+                <Card>
+                    <CardHeader
+                        title={post.user_id.username}
+                        avatar = {post.user_id.avatar.substring(10)}
+                    />
+                    <CardMedia
+                      overlay={<CardTitle title={post.content}/>}
+                      >
+                        <img src={post.image.substring(10)} alt=""/>
+                    </CardMedia>
+                </Card>
+                <div>
+                  <Checkbox
+                    checkedIcon={<ActionFavorite />}
+                    uncheckedIcon={<ActionFavoriteBorder />}
+                    style={styles.checkbox}
+                    onCheck={()=>{this.changeLikes(post._id)}}
+                  />
+                  <div className="likes"> {post.likes? post.like:"0"} likes</div>
+                </div>
+                <div className="comments_container">
+                  <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+                <div className="add_comment">
+                  <TextField hintText="Add a comment..."/><br />
+                </div>
+
+              </Paper>
+            </div>
+
+          ))}
+        </div>
+      );
+    }else{
+      return(
+        <div>Loading...</div>
+      );
+    }
   }
 
   render() {
+    console.log(this.props.followingPostsInfo);
     return(
-      <div className="post_container">
-        <Paper style={style} zDepth={1}>
-          <Card>
-              <CardHeader
-                  title="User Name"
-                  subtitle = "Location"
-                  avatar = "/images/image1.jpg"
-              />
-              <CardMedia>
-                  <img src="/images/image2.jpg" alt=""/>
-              </CardMedia>
-          </Card>
-          <BottomNavigation selectedIndex={this.state.selectedIndex}>
-              {/* <BottomNavigationItem
-                  label="Recents"
-                  icon={recentsIcon}
-                  onTouchTap={() => this.select(0)}
-              /> */}
-              <BottomNavigationItem
-                  label="Favorites"
-                  icon={favoritesIcon}
-                  onTouchTap={() => this.select(1)}
-              />
-              {/* <BottomNavigationItem
-                  label="Nearby"
-                  icon={nearbyIcon}
-                  onTouchTap={() => this.select(2)}
-              /> */}
-          </BottomNavigation>
-          <div className="likes_container"></div>
-          <div className="comments_container">
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-          <div className="add_comment">
-            <TextField hintText="Add a comment..."/><br />
-          </div>
-
-        </Paper>
+      <div>
+        {this.renderCard()}
       </div>
     );
   }
-
 }
+
+function mapStateToProps(state) {
+  return {
+    followingPostsInfo: state.posts.followingPostsInfo,
+    postChanged: state.posts.postChanged
+  };
+}
+
+export default connect(mapStateToProps, actions)(Postdiy);

@@ -222,3 +222,15 @@ p {
   text-align: center;
   font-size: 14px;
 }
+
+.likes {
+  text-align: left;
+  margin-left: 15px;
+  font-family:serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add_comment {
+  text-align: center;
+}

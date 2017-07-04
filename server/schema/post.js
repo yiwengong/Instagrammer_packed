@@ -11,7 +11,8 @@ const PostSchema= new Schema({
   user_id:{
     type: Schema.Types.ObjectId,
     ref: 'user'
-  }
+  },
+  timeField:Number,
 });
 
 const Post = mongoose.model('post', PostSchema);

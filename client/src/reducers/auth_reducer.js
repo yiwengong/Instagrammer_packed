@@ -1,4 +1,4 @@
-import {AUTH_USER, AUTH_ERROR, UNAUTH_USER,FETCH_USERINFO} from '../actions/types';
+import {AUTH_USER, AUTH_ERROR, UNAUTH_USER} from '../actions/types';
 
 export default function(state ={}, action) {
   switch (action.type) {

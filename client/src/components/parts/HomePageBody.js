@@ -28,7 +28,7 @@ class HomePageBody extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchOwnPosts();
   }
 
   renderPost() {
@@ -67,7 +67,7 @@ class HomePageBody extends Component {
 }
 
 function mapStateToProps(state) {
-  return {posts: state.posts.postsInfo}
+  return {posts: state.posts.ownPostsInfo}
 }
 
 export default connect(mapStateToProps,actions)(HomePageBody);
