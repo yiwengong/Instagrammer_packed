@@ -33,8 +33,10 @@ class ChangeAvatar extends Component {
     this.props.fetchUserInfo();
   }
 
-  handleAvatarSubmit(e) {
-
+  handleAvatarSubmit() {
+    const data = new FormData();
+    data.append('avatar', this.state.file);
+    this.props.changeUserAvatar(data);
   }
 
   handleChangeAvatar(e){
@@ -63,7 +65,7 @@ class ChangeAvatar extends Component {
     }else if(user){
       return(
         <Avatar
-         src={user.avatar}
+         src={user.avatar.substring(9)}
          size={150}
          style={styles.avatar}
          />
@@ -82,7 +84,8 @@ class ChangeAvatar extends Component {
       <div className="avatar_container">
         {this.renderAvatar()}
         <input type="file" id="avatarInput" style={styles.input} onChange={this.handleChangeAvatar.bind(this)}/>
-        <RaisedButton onSubmit={this.handleAvatarSubmit.bind(this)} label="Change Avatar" style={styles.button_style} />
+        <div className="message">{this.props.message}</div>
+        <RaisedButton onClick={this.handleAvatarSubmit.bind(this)} label="Change Avatar" style={styles.button_style} />
       </div>
 
     );
@@ -92,8 +95,8 @@ class ChangeAvatar extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.userInfo
-
+    user: state.user.userInfo,
+    message:state.user.message
   };
 }
 

@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     unique: true,
     required: [true, 'Name is required!']
   },
+  salt: String,
   password: {
     type: String,
     validate: {
@@ -18,7 +19,7 @@ const UserSchema = new Schema({
   },
   avatar:{
     type: String,
-    default: '/avatar/default.jpg'
+    default: '../public/avatar/default.jpg'
   },
   name: String,
   website: String,
@@ -56,6 +57,7 @@ UserSchema.virtual('postsCount').get(function(){
   return this.posts.length;
 });
 
+/*
 //On Save Hook, encrypt password
 //Before saving a model, run this function
 UserSchema.pre('save', function(next) {
@@ -84,6 +86,7 @@ UserSchema.methods.comparePassword = function(candidatePassword,callback){
     callback(null, isMatch);
   });
 };
+*/
 
 const User = mongoose.model('user', UserSchema);
 

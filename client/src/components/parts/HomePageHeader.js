@@ -57,7 +57,7 @@ class HomePageHeader extends Component {
       posts = user.posts.length;
       following = user.following.length;
       followers = user.followers.length;
-      avatar = user.avatar
+      avatar = user.avatar.substring(9);
     }else{
       username = 'loading';
       posts = 'loading';

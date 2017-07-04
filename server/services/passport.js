@@ -4,6 +4,7 @@ const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
+const saltPassword = require('../utils/saltPassword');
 
 //Create local Strategy
 const localOptions = {usernameField: 'email'}
@@ -15,13 +16,13 @@ const localLogin = new LocalStrategy(localOptions,function(email,password,done){
     if(err) {return done(err)}
     if(!user) {return done(null, false)}
 
-    //compare password -is this 'password' equal to user.password?
-    user.comparePassword(password, function(err, isMatch){
-      if(err) {return done(err)}
-      if(!isMatch) {return done(null, false)}
+    // 123 -> (hash_pasword, salt)
 
+    if (saltPassword.doesPasswordMatch(user.password, user.salt, password)) {
       return done(null, user);
-    });
+    } else {
+      return done(null, false);
+    }
 
   });
 

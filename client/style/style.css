@@ -207,7 +207,18 @@ textarea {
 }
 
 .input_container,
-.avatar_container {
+.avatar_container,
+.paper_container{
   text-align:center;
   margin: 10px;
+}
+
+h4 {
+  font-family: serif;
+  margin: 20px;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
 }

@@ -1,6 +1,7 @@
 const jwt =require('jwt-simple');
 const config = require('../config');
 const User = require('../schema/user');
+const saltPassword = require('../utils/saltPassword');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
@@ -30,11 +31,14 @@ module.exports.signup = function(req, res, next) {
       return res.status(422).send({error:'Email is in use'});
     }
 
+    const saltedPassword = saltPassword.makePasswordEntry(password);
+
     // If a user with emial does NOT exist, create and save user record
     const user = new User({
       email: email,
       username: username,
-      password: password
+      password: saltedPassword.hash,
+      salt: saltedPassword.salt
     });
 
     user.save(function(err){
