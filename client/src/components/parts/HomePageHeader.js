@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import {signoutUser} from '../../actions/auth_actions';
+import {fetchUserInfo} from '../../actions/user_actions';
 
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -41,12 +42,6 @@ class HomePageHeader extends Component {
 
   handleSignOut(){
     this.props.signoutUser();
-  }
-
-  handleUploadAvatar(){
-    const file = document.getElementById("avatarFile").files[0];
-    console.log(file);
-    // this.props.changeAvatar();
   }
 
   render() {
@@ -113,4 +108,4 @@ function mapStateToProps(state) {
   return {user: state.user.userInfo};
 }
 
-export default connect(mapStateToProps, actions)(HomePageHeader);
+export default connect(mapStateToProps, {signoutUser,fetchUserInfo})(HomePageHeader);

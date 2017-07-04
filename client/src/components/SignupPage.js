@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from '../actions';
+import * as actions from '../actions/auth_actions';
 
 //material-ui
 import Paper from 'material-ui/Paper';

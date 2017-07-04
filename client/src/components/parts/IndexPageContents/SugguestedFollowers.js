@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions';
+import {fetchUsers,changeFollowing} from '../../../actions/user_actions';
 
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -98,4 +98,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(SugguestedFollower);
+export default connect(mapStateToProps, {fetchUsers,changeFollowing})(SugguestedFollower);

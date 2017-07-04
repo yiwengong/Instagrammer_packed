@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import {reduxForm, Field} from 'redux-form';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions';
+import {createComment} from '../../../actions/comments_actions';
 import TextField from 'material-ui/TextField';
 
 const style ={
@@ -50,4 +50,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,actions)(CommentInput);
+export default connect(mapStateToProps,{createComment})(CommentInput);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions';
+import {fetchUserInfo} from '../actions/user_actions';
 
 //import components
 import AppTitle from './parts/AppTitle';
@@ -51,4 +51,4 @@ function mapStateToProps(state) {
   return {user: state.user.userInfo};
 }
 
-export default connect(mapStateToProps, actions)(IndexPage);
+export default connect(mapStateToProps, {fetchUserInfo})(IndexPage);

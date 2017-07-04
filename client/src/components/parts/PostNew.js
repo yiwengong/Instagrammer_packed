@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 import { Card, CardTitle, CardText } from 'material-ui';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import {createNewPost} from '../../actions/posts_actions';
 
 const styles = {
   paper_style :{
@@ -96,4 +96,4 @@ function mapStateToProps(state) {
   return { errorMessage: state.posts.error};
 }
 
-export default connect(mapStateToProps, actions)(PostNew)
+export default connect(mapStateToProps, {createNewPost})(PostNew)

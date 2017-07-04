@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import {fetchOwnPosts} from '../../actions/posts_actions';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -70,4 +70,4 @@ function mapStateToProps(state) {
   return {posts: state.posts.ownPostsInfo}
 }
 
-export default connect(mapStateToProps,actions)(HomePageBody);
+export default connect(mapStateToProps,{fetchOwnPosts})(HomePageBody);
