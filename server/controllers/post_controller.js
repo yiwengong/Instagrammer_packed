@@ -8,7 +8,7 @@ module.exports = {
     const postProps = {
       image: req.file.path,
       content: req.body.content,
-      likes: req.body.likes,
+      likes: 0,
       user_id: req.user._id,
       timeField:new Date().getTime()
     }
@@ -36,6 +36,24 @@ module.exports = {
       .limit(10)
       .then(posts=>{
         res.send(posts);
+      })
+  },
+
+  changeLike: function(req,res,next) {
+    const postId = req.body._id;
+    const checked = req.body.checked;
+
+    Post.findById({_id: postId})
+      .then((post) =>{
+        if(checked) {
+          post.likes ++;
+        }else{
+          post.likes --;
+        }
+        post.save()
+          .then(()=>{
+            res.send('Add like');
+          })
       })
   },
 

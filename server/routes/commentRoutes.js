@@ -5,7 +5,7 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', {session: false});
 
 module.exports = function(app) {
-  app.post('/comment/:userId/:postId/new', requireAuth, CommentController.create);
+  app.post('/comments/new', requireAuth, CommentController.create);
   app.delete('/comment/:userId/:postId/:commentId', requireAuth, CommentController.delete);
 
 };

@@ -11,4 +11,5 @@ export const POST_CREATE = 'post_create';
 export const FETCH_OWNPOSTINFO ='fetch_postInfo';
 export const FETCH_FOLLOWINGPOSTINFO = 'fetch_followingPostInfo';
 export const CHANGE_LIKES = 'change_likes';
-export const POST_ERROR = 'post_error'
+export const POST_ERROR = 'post_error';
+export const COMMENT_CREATE = 'comment_create';

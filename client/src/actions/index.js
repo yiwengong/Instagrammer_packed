@@ -1,5 +1,20 @@
 import axios from 'axios';
-import {AUTH_USER, AUTH_ERROR,UNAUTH_USER,FETCH_USERINFO, FETCH_USERS, CHANGE_PASSWORD, CHANGE_AVATAR, CHANGE_FOLLOWING, POST_CREATE,FETCH_OWNPOSTINFO,FETCH_FOLLOWINGPOSTINFO, CHANGE_LIKES,POST_ERROR} from './types';
+import {
+  AUTH_USER,
+  AUTH_ERROR,
+  UNAUTH_USER,
+  FETCH_USERINFO,
+  FETCH_USERS,
+  CHANGE_PASSWORD,
+  CHANGE_AVATAR,
+  CHANGE_FOLLOWING,
+  POST_CREATE,
+  FETCH_OWNPOSTINFO,
+  FETCH_FOLLOWINGPOSTINFO,
+  CHANGE_LIKES,
+  POST_ERROR,
+  COMMENT_CREATE
+} from './types';
 
 const ROOT_URL = 'http://localhost:3090';
 
@@ -231,9 +246,12 @@ export function fetchFollowingPosts() {
 }
 
 //Change like state of a post:
-export function changeLikes(postId) {
-  eturn function(dispatch) {
-    const data = {_id:postId}
+export function changeLikes(postId,isInputChecked, callback) {
+  return function(dispatch) {
+    const data = {
+      _id:postId,
+      checked: isInputChecked
+    }
     const config = {
       headers: {
         authorization: localStorage.getItem('token')
@@ -245,10 +263,12 @@ export function changeLikes(postId) {
           type: CHANGE_LIKES,
           payload:response.data
         });
+        callback();
       })
       .catch(() =>{
         dispatch((postError('Something wrong!')));
       })
+    }
 }
 
 export function postError(error) {
@@ -257,3 +277,31 @@ export function postError(error) {
     payload: error
   };
 };
+
+//Comments:
+
+//Create a comment:
+export function createComment(data, callback) {
+  //Submit token and data to the server
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.post(`${ROOT_URL}/comments/new`,data, config)
+      .then(response => {
+        //If request is good
+        dispatch({
+          type: COMMENT_CREATE,
+          payload:response.data
+        });
+        callback();
+      })
+      .catch(()=> {
+        //If request is bad...
+        //1.Show an error to the user
+        dispatch((postError('Something wrong')));
+      });
+  }
+}

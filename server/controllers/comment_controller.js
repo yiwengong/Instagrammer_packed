@@ -6,9 +6,11 @@ module.exports = {
 
     const commentProps = {
       comment: req.body.comment,
-      user_id: req.params.userId,
-      post_id: req.params.postId
+      user_id: req.user._id,
+      post_id: req.body.post_id
     }
+
+    console.log(commentProps);
 
     Comment.create(commentProps)
       .then(comment =>res.send(comment))

@@ -15,6 +15,9 @@ import NewPostPage from './NewPostPage';
 import EditFilePage from './EditFilePage';
 import RequireAuth from './require_auth';
 
+//test
+import Comments from './parts/IndexPageContents/comments';
+
 // theme
 const muiTheme = getMuiTheme({
   palette: {
@@ -33,6 +36,7 @@ class Main extends Component {
         <div>
           <BrowserRouter>
             <Switch>
+              <Route path ="/test" component = {Comments}/>
               <Route path ="/signup" component = {SignupPage}/>
               <Route path ="/signin" component = {SigninPage}/>
               <Route path ="/editfile" component = {RequireAuth(EditFilePage)}/>

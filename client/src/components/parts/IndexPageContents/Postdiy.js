@@ -9,12 +9,12 @@ import Checkbox from 'material-ui/Checkbox';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
+import Comments from './comments';
+
 const styles = {
-  paper:{
-    height: 900,
+   card: {
     width: 550,
     margin: 20,
-    display: 'inline-block',
   },
   checkbox: {
     marginTop: 20,
@@ -25,15 +25,19 @@ const styles = {
 class Postdiy extends Component {
   constructor(props) {
       super(props);
-      this.changeLikes = this.changeLikes.bind(this);
+      this.handleLikes = this.handleLikes.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchFollowingPosts();
   }
 
-  changeLikes(postId) {
-    this.changeLikes(postId);
+  handleLikes(event, isInputChecked, postId) {
+    console.log(event)
+    console.log(isInputChecked)
+    this.props.changeLikes(postId,isInputChecked,()=>{
+      this.props.fetchFollowingPosts();
+    });
   }
 
   renderCard() {
@@ -44,8 +48,7 @@ class Postdiy extends Component {
         <div>
           {posts.map((post) =>(
             <div className="post_container" key={post._id}>
-              <Paper style={styles.paper} zDepth={1}>
-                <Card>
+                <Card style={styles.card}>
                     <CardHeader
                         title={post.user_id.username}
                         avatar = {post.user_id.avatar.substring(10)}
@@ -55,29 +58,21 @@ class Postdiy extends Component {
                       >
                         <img src={post.image.substring(10)} alt=""/>
                     </CardMedia>
-                </Card>
-                <div>
-                  <Checkbox
-                    checkedIcon={<ActionFavorite />}
-                    uncheckedIcon={<ActionFavoriteBorder />}
-                    style={styles.checkbox}
-                    onCheck={()=>{this.changeLikes(post._id)}}
-                  />
-                  <div className="likes"> {post.likes? post.like:"0"} likes</div>
-                </div>
-                <div className="comments_container">
-                  <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <div className="add_comment">
-                  <TextField hintText="Add a comment..."/><br />
-                </div>
+                    <Checkbox
+                      checkedIcon={<ActionFavorite />}
+                      uncheckedIcon={<ActionFavoriteBorder />}
+                      style={styles.checkbox}
 
-              </Paper>
+                      onCheck = {(event,isInputChecked) => {this.handleLikes(event,isInputChecked,post._id)}}
+                    />
+                    <div className="likes"> {post.likes} likes</div>
+                    <div>
+                      <Comments postid={post._id}/>
+                    </div>
+                </Card>
+
             </div>
+
 
           ))}
         </div>
@@ -90,7 +85,6 @@ class Postdiy extends Component {
   }
 
   render() {
-    console.log(this.props.followingPostsInfo);
     return(
       <div>
         {this.renderCard()}
