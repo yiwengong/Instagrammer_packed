@@ -15,23 +15,22 @@ class CommentInput extends Component {
   }
 
   handleSubmit(event){
-    event.preventDefault();
-    const data = {
-      comment:document.getElementById('commentInput').value,
-      post_id: this.props.postid
-    }
-    document.getElementById('commentInput').value ='';
-    this.props.createComment(data,()=>{
-      console.log(this.props.comment);
-    })
+      event.preventDefault();
+      const data = {
+        comment:document.getElementById(this.props.postid).value,
+        post_id: this.props.postid
+      }
+      document.getElementById(this.props.postid).value ='';
+      this.props.createComment(data,()=>{
+        console.log(this.props.comment);
+      })
   };
 
   render() {
-
     return(
       <form onSubmit={(event)=>this.handleSubmit(event)}>
         <TextField
-          id="commentInput"
+          id={this.props.postid}
           style={style}
           hintText="Add comments..."
           fullWidth = {true}

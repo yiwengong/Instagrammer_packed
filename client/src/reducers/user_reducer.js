@@ -1,4 +1,12 @@
-import {FETCH_USERINFO,FETCH_USERS,CHANGE_PASSWORD,CHANGE_AVATAR,CHANGE_FOLLOWING} from '../actions/types';
+import {
+  FETCH_USERINFO,
+  FETCH_USERS,
+  CHANGE_PASSWORD,
+  CHANGE_AVATAR,
+  CHANGE_FOLLOWING,
+  FETCH_OTHERUSERINFO,
+  USER_ERROR
+} from '../actions/types';
 
 export default function(state ={following: false}, action) {
   switch (action.type) {
@@ -12,6 +20,10 @@ export default function(state ={following: false}, action) {
       return {...state, message:'', users: action.payload}
     case CHANGE_FOLLOWING:
       return {...state, message: '',following: !state.following}
+    case FETCH_OTHERUSERINFO:
+      return {...state, message: '',otherUserInfo: action.payload}
+    case USER_ERROR:
+      return {...state, message:action.payload}
   }
   return state;
 }

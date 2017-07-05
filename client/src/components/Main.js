@@ -13,10 +13,9 @@ import IndexPage from './IndexPage';
 import HomePage from './HomePage';
 import NewPostPage from './NewPostPage';
 import EditFilePage from './EditFilePage';
+import AccountPage from './AccountPage';
 import RequireAuth from './require_auth';
 
-//test
-import Comments from './parts/IndexPageContents/comments';
 
 // theme
 const muiTheme = getMuiTheme({
@@ -36,12 +35,12 @@ class Main extends Component {
         <div>
           <BrowserRouter>
             <Switch>
-              <Route path ="/test" component = {Comments}/>
               <Route path ="/signup" component = {SignupPage}/>
               <Route path ="/signin" component = {SigninPage}/>
               <Route path ="/editfile" component = {RequireAuth(EditFilePage)}/>
               <Route path ="/home" component = {RequireAuth(HomePage)}/>
               <Route path ="/newpost" component = {RequireAuth(NewPostPage)}/>
+              <Route path ="/:username" component = {RequireAuth(AccountPage)}/>
               <Route path ="/" component = {RequireAuth(IndexPage)}/>
             </Switch>
           </BrowserRouter>

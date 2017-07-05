@@ -96,9 +96,10 @@ export function changeLikes(postId,isInputChecked, callback) {
       })
       .catch(() =>{
         dispatch((postError('Something wrong!')));
-      })
-    }
-}
+      });
+    };
+};
+
 
 export function postError(error) {
   return{

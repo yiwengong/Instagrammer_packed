@@ -4,7 +4,6 @@ const User = require('../schema/user');
 module.exports = {
 
   create: function(req, res, next){
-    console.log(req.file);
     const postProps = {
       image: req.file.path,
       content: req.body.content,
@@ -30,9 +29,11 @@ module.exports = {
 
   fetchFollowingPosts: function(req,res,next) {
     const {user} = req;
-    Post.find({user_id: {$in: user.following}})
+    const userId = user.following;
+    userId.push(user._id);
+    Post.find({user_id: {$in: userId}})
       .populate('user_id')
-      .sort({timeField:1})
+      .sort({timeField:-1})
       .limit(10)
       .then(posts=>{
         res.send(posts);

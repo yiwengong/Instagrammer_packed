@@ -16,11 +16,9 @@ module.exports = {
   },
 
   //find a user
-  find: function(req,res,next) {
-
-    const username = req.params.username;
-    User.findOne({username: username})
-      .then((user) => {res.send(user)})
+  findOtherUserInfo: function(req,res,next) {
+    User.findOne({username: req.query.username})
+      .then((otherUser) => {res.send(otherUser)})
       .catch(next);
   },
 

@@ -13,3 +13,7 @@ export const FETCH_FOLLOWINGPOSTINFO = 'fetch_followingPostInfo';
 export const CHANGE_LIKES = 'change_likes';
 export const POST_ERROR = 'post_error';
 export const COMMENT_CREATE = 'comment_create';
+export const FETCH_COMMENTS = 'fetch_comments';
+export const COMMENT_ERROR ='comment_error';
+export const FETCH_OTHERUSERINFO = 'fetch_otheruserinfo';
+export const USER_ERROR = 'user_error';

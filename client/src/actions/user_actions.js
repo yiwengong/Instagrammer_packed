@@ -5,6 +5,8 @@ import {
   CHANGE_PASSWORD,
   CHANGE_AVATAR,
   CHANGE_FOLLOWING,
+  FETCH_OTHERUSERINFO,
+  USER_ERROR
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -29,7 +31,7 @@ export function changeUserPassword({oldPassword,newPassword}) {
         })
       })
       .catch(({response})=>{
-        dispatch((authError(response.data.error)));
+        dispatch((userError(response.data.error)));
       });
   }
 }
@@ -51,7 +53,7 @@ export function changeUserAvatar(data) {
         })
       })
       .catch(()=>{
-        dispatch((authError('Please choose a image.')));
+        dispatch((userError('Please choose a image.')));
       });
   }
 }
@@ -73,7 +75,7 @@ export function changeFollowing(userId, callback) {
         callback();
       })
       .catch(()=>{
-        dispatch((authError('Something wrong!')));
+        dispatch((userError('Something wrong!')));
       })
   }
 }
@@ -112,3 +114,28 @@ export function fetchUsers() {
       });
   }
 }
+
+//Fetch other user info:
+export function fetchOtherUserInfo(username) {
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.get(`${ROOT_URL}/otheruser?username=${username}`, config)
+      .then(response => {
+        dispatch({
+          type: FETCH_OTHERUSERINFO,
+          payload: response.data
+        });
+      });
+  }
+}
+
+export function userError(error) {
+  return{
+    type: USER_ERROR,
+    payload: error
+  };
+};

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../actions/posts_actions';
+import {Link} from 'react-router-dom';
 
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -8,6 +9,9 @@ import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import Avatar from 'material-ui/Avatar';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
 
 import Comments from './comments';
 
@@ -17,9 +21,13 @@ const styles = {
     margin: 20,
   },
   checkbox: {
-    marginTop: 20,
+    marginTop: 10,
     marginLeft:10,
   },
+  list: {
+    margin:10,
+    padding:0,
+  }
 };
 
 class Postdiy extends Component {
@@ -33,8 +41,6 @@ class Postdiy extends Component {
   }
 
   handleLikes(event, isInputChecked, postId) {
-    console.log(event)
-    console.log(isInputChecked)
     this.props.changeLikes(postId,isInputChecked,()=>{
       this.props.fetchFollowingPosts();
     });
@@ -48,32 +54,32 @@ class Postdiy extends Component {
         <div>
           {posts.map((post) =>(
             <div className="post_container" key={post._id}>
-                <Card style={styles.card}>
-                    <CardHeader
-                        title={post.user_id.username}
-                        avatar = {post.user_id.avatar.substring(10)}
+              <Card style={styles.card}>
+                <ListItem style= {styles.list}
+                  leftAvatar={
+                    <Avatar src={post.user_id.avatar.substring(10)} />
+                  }
+                  containerElement= {<Link to ={`/${post.user_id.username}`}/>}
+                  >
+                  {post.user_id.username}
+                </ListItem>
+                <CardMedia overlay={<CardTitle title={post.content}/>}>
+                  <img src={post.image.substring(10)} alt=""/>
+                </CardMedia>
+                <div>
+                  <Checkbox
+                    checkedIcon={<ActionFavorite />}
+                    uncheckedIcon={<ActionFavoriteBorder />}
+                    style={styles.checkbox}
+                    onCheck = {(event,isInputChecked) => {this.handleLikes(event,isInputChecked,post._id)}}
                     />
-                    <CardMedia
-                      overlay={<CardTitle title={post.content}/>}
-                      >
-                        <img src={post.image.substring(10)} alt=""/>
-                    </CardMedia>
-                    <Checkbox
-                      checkedIcon={<ActionFavorite />}
-                      uncheckedIcon={<ActionFavoriteBorder />}
-                      style={styles.checkbox}
-
-                      onCheck = {(event,isInputChecked) => {this.handleLikes(event,isInputChecked,post._id)}}
-                    />
-                    <div className="likes"> {post.likes} likes</div>
-                    <div>
-                      <Comments postid={post._id}/>
-                    </div>
-                </Card>
-
+                  <div className="likes"> {post.likes} likes</div>
+                </div>
+                <div>
+                  <Comments postid={post._id}/>
+                </div>
+              </Card>
             </div>
-
-
           ))}
         </div>
       );

@@ -234,3 +234,19 @@ p {
 .add_comment {
   text-align: center;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0
+}
+
+span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+li {
+  margin:0;
+  padding: 0;
+}

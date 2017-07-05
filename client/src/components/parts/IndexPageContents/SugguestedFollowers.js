@@ -52,13 +52,13 @@ class SugguestedFollower extends Component {
 
   renderList() {
     const users = this.props.users;
-    console.log(users);
     if(users) {
       return(
         <List>
           <Subheader>Suggestion For You</Subheader>
           {users.map((user)=>(
             <ListItem
+              disabled={true}
               key={user._id}
               primaryText={user.username}
               leftAvatar={<Avatar src={user.avatar.substring(10)} />}
@@ -81,7 +81,6 @@ class SugguestedFollower extends Component {
   }
 
   render() {
-    console.log(this.props.users);
     return(
       <div className="post_container">
         <Paper style={styles.paper} zDepth={1}>
