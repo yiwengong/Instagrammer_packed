@@ -16,10 +16,21 @@ postRoutes = require('./routes/postRoutes');
 //set up express
 const app = express();
 
+// cros OPTIONS
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 //mongodb
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 if(process.env.NODE_ENV !== 'test'){
+  //const mongolab = 'mongodb://yiwengong:yiwengong@ds151062.mlab.com:51062/instagrammer_packed';
+  //const localdb = 'mongodb://localhost/Instagrammer_packed';
+  //mongoose.connect('mongodb://yiwengong:yiwengong@ds151062.mlab.com:51062/instagrammer_packed');
   mongoose.connect('mongodb://localhost/Instagrammer_packed');
 }
 

@@ -9,7 +9,7 @@ const app = express();
 // static files
 app.use('/images', express.static(__dirname + '/../public/images'));
 app.use('/avatar', express.static(__dirname + '/../public/avatar'));
-app.use('/dist', express.static(__dirname + '/dist'));
+app.use('/', express.static(__dirname + '/dist'));
 app.use('/style', express.static(__dirname + '/style'));
 
 app.get("*", function(req, res) {
@@ -17,7 +17,7 @@ app.get("*", function(req, res) {
 });
 
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 const server = http.createServer(app);
 server.listen(port);
 console.log('Sever listening on:', port);
