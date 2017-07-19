@@ -6,8 +6,8 @@ import {
 }
   from './types';
 
-//const ROOT_URL = 'http://localhost:3090';
-const ROOT_URL = 'http://54.224.87.182:3090';
+const ROOT_URL = 'http://localhost:3090';
+// const ROOT_URL = 'http://54.224.87.182:3090';
 
 //Comments:
 
