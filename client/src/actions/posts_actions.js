@@ -7,7 +7,8 @@ import {
   POST_ERROR,
 } from './types';
 
-const ROOT_URL = 'http://localhost:3090';
+//const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL = 'http://54.224.87.182:3090';
 
 export function createNewPost(data, callback) {
   //Submit token and data to the server
