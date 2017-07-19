@@ -34,17 +34,20 @@ class Comments extends Component {
     super(props);
     this.state = {
       expanded: false,
+      allComment: []
     };
     this.handleExpand = this.handleExpand.bind(this);
   }
 
   handleExpand() {
     this.setState({expanded: true});
-    this.props.fetchPostComments(this.props.postid);
+    this.props.fetchPostComments(this.props.postid, (comments) => {
+      this.setState({ allComment: this.renderComments(comments) });
+    });
   };
 
-  renderComments() {
-    const {comments} = this.props;
+  renderComments(comments) {
+    // const {comments} = this.props;
     if(comments) {
       return (
         <div>
@@ -65,7 +68,7 @@ class Comments extends Component {
   }
 
   render() {
-    console.log(this.props.comments)
+    // console.log(this.props.comments)
     return (
     <div >
       <Paper>
@@ -76,7 +79,7 @@ class Comments extends Component {
             />
           </div>
           <CardText style= {styles.cardtext} expandable={true}>
-            {this.renderComments()}
+            {this.state.allComment}
           </CardText>
           <CardText>
             <CommentInput postid={this.props.postid}/>

@@ -36,7 +36,7 @@ export function createComment(data, callback) {
   };
 };
 
-export function fetchPostComments(postId) {
+export function fetchPostComments(postId, callback) {
   return function(dispatch) {
     const config = {
       headers: {
@@ -49,6 +49,7 @@ export function fetchPostComments(postId) {
           type: FETCH_COMMENTS,
           payload:response.data.comments
         });
+        callback(response.data.comments);
       })
       .catch(() =>{
         dispatch((commentError('Something wrong!')));
