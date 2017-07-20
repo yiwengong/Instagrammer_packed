@@ -38,9 +38,8 @@ class Main extends Component {
               <Route path ="/signup" component = {SignupPage}/>
               <Route path ="/signin" component = {SigninPage}/>
               <Route path ="/editfile" component = {RequireAuth(EditFilePage)}/>
-              <Route path ="/home" component = {RequireAuth(HomePage)}/>
               <Route path ="/newpost" component = {RequireAuth(NewPostPage)}/>
-              <Route path ="/:username" component = {RequireAuth(AccountPage)}/>
+              <Route path ="/:username" component = {RequireAuth(HomePage)}/>
               <Route path ="/" component = {RequireAuth(IndexPage)}/>
             </Switch>
           </BrowserRouter>

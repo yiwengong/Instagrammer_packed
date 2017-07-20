@@ -70,48 +70,29 @@ module.exports = {
             if(user.following.length === len){
               user.following.push(following_id._id);
               followingUser.followers.push(user._id);
-              Promise.all([user.save(),followingUser.save()])
-                .then(()=>{
-                  res.send("saved");
-                })
             }
+            Promise.all([user.save(),followingUser.save()])
+              .then(()=>{
+                res.send("saved");
+              })
           })
-
       })
-
-    // User.findOneAndUpdate({_id:user._id}, {$pull: {following: ObjectId(following_id._id)}})
-    //   .then((data) => {
-    //       if(data.id=== user.id) {
-    //         user.following.push(following_id);
-    //         user.save()
-    //           .then(()=>{
-    //             User.findById(user._id)
-    //               .then((user) =>{
-    //                 res.send(user);
-    //               });
-    //           });
-    //       }
-    //     })
-    //     .catch((err)=>{
-    //       console.log(err);
-    //     })
-    //
-    // User.findOneAndUpdate(following_id, {$pull: {followers: ObjectId(user._id)}})
-    //       .then((data)=>{
-    //         if(data._id ) {
-    //           followinguser.follower.push(user._id);
-    //           followinguser.save()
-    //             .then(()=>{
-    //               User.findById(following_id)
-    //                 .then((followinguser) =>{
-    //                   console.log(followinguser)
-    //                 });
-    //             })
-    //         }
-    //   })
   },
 
-
+  checkFollowing: function(req,res,next) {
+    const {username} = req.query;
+    User.findById({ _id: req.user._id})
+      .then((selfUser) => {
+        User.findOne({username: username})
+          .then((otherUser) => {
+            if(selfUser.following.indexOf(otherUser._id) != -1) {
+              res.send(true);
+            }else{
+              res.send(false);
+            }
+          })
+      })
+  },
 
   //Find all the posts of the user
   findPosts: function(req,res,next) {

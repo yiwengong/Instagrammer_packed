@@ -17,6 +17,7 @@ module.exports = function(app) {
   app.put('/users/password', requireAuth, UserController.changePassword);
   app.put('/users/avatar', [requireAuth, upload.single('avatar')], UserController.changeAvatar);
   app.put('/users/following', requireAuth, UserController.changeFollowing);
+  app.get('/users/followed', requireAuth, UserController.checkFollowing);
   app.get('/users', requireAuth, UserController.sugguestedFollower);
   app.get('/user', requireAuth, UserController.findUserInfo);
   app.get('/otheruser', requireAuth, UserController.findOtherUserInfo);

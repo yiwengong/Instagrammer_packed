@@ -4,12 +4,16 @@ import HomePageHeader from './parts/HomePageHeader';
 import HomePageBody from './parts/HomePageBody';
 
 export default class IndexPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
         <AppTitle/>
-        <HomePageHeader />
-        <HomePageBody />
+        <HomePageHeader username= {this.props.match.params.username}/>
+        <HomePageBody username= {this.props.match.params.username}/>
       </div>
     );
   }

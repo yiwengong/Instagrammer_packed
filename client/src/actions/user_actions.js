@@ -5,6 +5,7 @@ import {
   CHANGE_PASSWORD,
   CHANGE_AVATAR,
   CHANGE_FOLLOWING,
+  CHECK_FOLLOWING,
   FETCH_OTHERUSERINFO,
   USER_ERROR
 } from './types';
@@ -72,6 +73,28 @@ export function changeFollowing(userId, callback) {
       .then((response) => {
         dispatch({
           type: CHANGE_FOLLOWING
+        })
+        callback();
+      })
+      .catch(()=>{
+        dispatch((userError('Something wrong!')));
+      })
+  }
+}
+
+export function checkFollowing(username) {
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.get(`${ROOT_URL}/users/followed?username=${username}`, config)
+      .then((response) => {
+        // console.log(response.data);
+        dispatch({
+          type: CHECK_FOLLOWING,
+          payload: response.data
         })
         callback();
       })
