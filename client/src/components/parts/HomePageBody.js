@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchOwnPosts} from '../../actions/posts_actions';
+import {fetchUserPosts} from '../../actions/posts_actions';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -28,7 +28,7 @@ class HomePageBody extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchOwnPosts();
+    this.props.fetchUserPosts(this.props.username);
   }
 
   renderPost() {
@@ -67,7 +67,7 @@ class HomePageBody extends Component {
 }
 
 function mapStateToProps(state) {
-  return {posts: state.posts.ownPostsInfo}
+  return {posts: state.posts.userPostsInfo}
 }
 
-export default connect(mapStateToProps,{fetchOwnPosts})(HomePageBody);
+export default connect(mapStateToProps,{fetchUserPosts})(HomePageBody);

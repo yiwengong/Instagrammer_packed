@@ -96,7 +96,8 @@ module.exports = {
 
   //Find all the posts of the user
   findPosts: function(req,res,next) {
-    User.findById({ _id: req.user._id})
+    const {username} = req.query;
+    User.findOne({ username: username })
     .populate('posts')
     .then(user => res.send(user.posts));
   },

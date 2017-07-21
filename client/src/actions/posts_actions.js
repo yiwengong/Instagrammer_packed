@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   POST_CREATE,
-  FETCH_OWNPOSTINFO,
+  FETCH_USERPOSTINFO,
   FETCH_FOLLOWINGPOSTINFO,
   CHANGE_LIKES,
   POST_ERROR,
@@ -34,17 +34,17 @@ export function createNewPost(data, callback) {
 
 
 //Fetch own posts:
-export function fetchOwnPosts() {
+export function fetchUserPosts(username) {
   return function(dispatch) {
     const config = {
       headers: {
         authorization: localStorage.getItem('token')
       }
     };
-    axios.get(`${ROOT_URL}/users/posts`,config)
+    axios.get(`${ROOT_URL}/users/posts?username=${username}`,config)
       .then(response =>{
         dispatch({
-          type: FETCH_OWNPOSTINFO,
+          type: FETCH_USERPOSTINFO,
           payload: response.data
         });
       })
