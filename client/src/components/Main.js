@@ -16,7 +16,6 @@ import EditFilePage from './EditFilePage';
 import AccountPage from './AccountPage';
 import RequireAuth from './require_auth';
 
-
 // theme
 const muiTheme = getMuiTheme({
   palette: {

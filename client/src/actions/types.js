@@ -4,6 +4,7 @@ export const UNAUTH_USER = 'unauth_user';
 export const FETCH_MESSAGE = 'fetch_message';
 export const FETCH_USERINFO = 'fetch_userInfo';
 export const FETCH_OTHERUSERINFO = 'fetch_otherUserInfo';
+export const FETCH_MATCHEDUSERS = 'fetch_matchedUsers';
 export const FETCH_USERS = 'fetch_users';
 export const CHANGE_PASSWORD = 'change_password';
 export const CHANGE_AVATAR = 'change_avatar';

@@ -21,5 +21,6 @@ module.exports = function(app) {
   app.get('/users', requireAuth, UserController.sugguestedFollower);
   app.get('/user', requireAuth, UserController.findUserInfo);
   app.get('/otheruser', requireAuth, UserController.findOtherUserInfo);
+  app.get('/searchuser', requireAuth, UserController.searchUser);
 
 };

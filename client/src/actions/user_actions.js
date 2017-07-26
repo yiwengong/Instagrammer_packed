@@ -7,6 +7,7 @@ import {
   CHANGE_FOLLOWING,
   CHECK_FOLLOWING,
   FETCH_OTHERUSERINFO,
+  FETCH_MATCHEDUSERS,
   USER_ERROR
 } from './types';
 
@@ -152,6 +153,24 @@ export function fetchOtherUserInfo(username) {
         dispatch({
           type: FETCH_OTHERUSERINFO,
           payload: response.data
+        });
+      });
+  }
+}
+
+//Fetch Matched User info:
+export function onSearchTermChange(data) {
+  return function(dispatch) {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    };
+    axios.get(`${ROOT_URL}/searchuser?data=${data}`, config)
+      .then(response => {
+        dispatch({
+          type: FETCH_MATCHEDUSERS,
+          payload:response.data
         });
       });
   }

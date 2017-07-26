@@ -6,6 +6,7 @@ import {
   CHANGE_FOLLOWING,
   CHECK_FOLLOWING,
   FETCH_OTHERUSERINFO,
+  FETCH_MATCHEDUSERS,
   USER_ERROR
 } from '../actions/types';
 
@@ -25,6 +26,8 @@ export default function(state ={following: false}, action) {
       return {...state, message:'', following: action.payload};
     case FETCH_OTHERUSERINFO:
       return {...state, message: '',otherUserInfo: action.payload};
+    case FETCH_MATCHEDUSERS:
+      return {...state, message:'', matchedUsers: action.payload};
     case USER_ERROR:
       return {...state, message:action.payload}
   }

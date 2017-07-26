@@ -3,14 +3,15 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {fetchUserInfo} from './../../actions/user_actions';
+import SearchBar from './SearchBar';
+
+import {fetchUserInfo,searchByUsename} from './../../actions/user_actions';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
-
 
 const styles = {
   mediumIcon: {
@@ -37,6 +38,7 @@ class AppTitle extends Component {
       this.props.fetchUserInfo();
     }
 
+
     render() {
       const {user} = this.props;
       var url;
@@ -49,7 +51,10 @@ class AppTitle extends Component {
             <a className="title_button" href="/">Instagrammer</a>
           </div>
           <div className="searchBar_container">
-            <input type="text" className="searchBar" placeholder="Search" />
+
+            <div className="search">
+              <SearchBar />
+            </div>
           </div>
 
             <div className="home_button">
@@ -77,8 +82,9 @@ class AppTitle extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.userInfo
+    user: state.user.userInfo,
+
   };
 }
 
-export default connect(mapStateToProps, {fetchUserInfo})(AppTitle);
+export default connect(mapStateToProps, {fetchUserInfo,searchByUsename})(AppTitle);

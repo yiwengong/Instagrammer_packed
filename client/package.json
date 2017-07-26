@@ -33,6 +33,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "lodash": "^4.17.4",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "material-ui-upload": "^1.1.5",
     "path": "^0.12.7",
     "react": "^15.6.1",

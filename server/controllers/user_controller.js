@@ -110,6 +110,14 @@ module.exports = {
       .then(users =>{
         res.send(users);
       })
+  },
+
+  //search user according to some input
+  searchUser: function (req,res, next) {
+    const {data} = req.query;
+    console.log(data);
+    User.find({username: {$regex:`.*${data}.*`}})
+      .then(users => res.send(users));
   }
 
 }
