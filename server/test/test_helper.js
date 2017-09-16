@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 before((done) => {
-
   mongoose.connect('mongodb://localhost/Instagrammer_test');
   mongoose.connection
     .once('open',()=> { done(); })
@@ -14,7 +13,6 @@ before((done) => {
 });
 
 beforeEach((done) => {
-
   const {users, comments, posts } = mongoose.connection.collections;
   users.drop(() => {
     comments.drop(() => {

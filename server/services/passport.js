@@ -26,7 +26,6 @@ const localLogin = new LocalStrategy(localOptions,function(email,password,done){
 
   });
 
-
 });
 
 //Set up options for JWT Strategy

@@ -61,3 +61,5 @@ const port = process.env.PORT || 3090;
 const server = http.createServer(app);
 server.listen(port);
 console.log('Sever listening on:', port);
+
+module.exports = app;
